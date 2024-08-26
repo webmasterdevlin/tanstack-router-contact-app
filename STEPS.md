@@ -16,8 +16,9 @@ function RootComponent() {
             <h1>Hello from React and TanStack Router</h1>
         </div>
     );
-} 
+}
 ```
+- [x] place `TanStackRouterVite()` in the vite.config.ts' plugins
 - [x] generate the `routeTree.gen.ts` using TanStack Router CLI
 ```zsh
 npm i -g @tanstack/react-router-cli 
