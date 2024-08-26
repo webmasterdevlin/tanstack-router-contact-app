@@ -18,6 +18,7 @@ declare module '@tanstack/react-router' {
 }
 
 function InnerApp() {
+  // add context from authentication library like MSAL
   return <RouterProvider router={router} />;
 }
 
