@@ -18,10 +18,7 @@ declare module '@tanstack/react-router' {
 }
 
 function InnerApp() {
-  return (
-    // navigation bar
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 function App() {
