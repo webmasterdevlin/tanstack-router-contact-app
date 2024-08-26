@@ -19,6 +19,7 @@
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
+    "@tanstack/router-cli": "^1.49.3",
     "@tanstack/router-devtools": "^1.49.2",
     "@types/node": "^22.5.0",
     "@types/react": "^18.3.3",
