@@ -17,7 +17,7 @@ export default function SidebarSearchContact({ query, setQuery }: Props) {
     await navigate({ search: { q: e.currentTarget.value } });
   };
 
-  const action = async (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const contact = await createContact();
     await navigate({
@@ -41,7 +41,7 @@ export default function SidebarSearchContact({ query, setQuery }: Props) {
         <div id="search-spinner" hidden={!router.state.isLoading} aria-hidden />
         <div className="sr-only" aria-live="polite"></div>
       </form>
-      <form onSubmit={action}>
+      <form onSubmit={handleOnSubmit}>
         <button type="submit">New</button>
       </form>
     </div>

@@ -257,4 +257,40 @@ function EditContactComponent() {
 ```tsx
   component: EditContactComponent,
 ```
-- [x] we will need again the 
+- [x] we will need again the 3 Route hooks. Place them in the `EditContactForm.tsx` file.
+```tsx
+  const contact = Route.useLoaderData();
+  const params = Route.useParams();
+  const navigate = Route.useNavigate();
+```
+- [x] update the `handleOnSubmit` function to the **params** and the **navigate**.
+```tsx
+  const handleOnSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const form = event.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const updates = Object.fromEntries(formData.entries());
+    await updateContact(params.contactId as string, updates);
+    await navigate({
+      to: `/contacts/${params.contactId}`,
+    });
+  };
+```
+- [x] Go the browser and click a **no name** contact. Add a `/edit` to the url and see the edit form.
+- [x] Try to update the details of the contact and see the changes in the browser.
+
+## Adding navigation going to the edit form of the contact
+
+- [x] go back to the `ContactDetail.tsx` file and update the `handleEditEvent` function with this:
+```tsx
+  const handleEditEvent = async (event: FormEvent) => {
+    event.preventDefault();
+    await navigate({
+      to: `/contacts/${params.contactId}/edit`,
+    });
+  };
+```
+- [x] go back also to the `SidebarSearchContact.tsx` file and add this hook to the component.
+```tsx
+  const navigate = Route.useNavigate();
+```
