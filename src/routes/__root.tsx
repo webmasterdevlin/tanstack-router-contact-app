@@ -37,7 +37,7 @@ const TanStackRouterDevtools =
       );
 
 function RootComponent() {
-  const { contacts, q } = Route.useLoaderData();
+  const { q } = Route.useLoaderData();
   const router = useRouter();
   const [query, setQuery] = useState(q ?? '');
 
@@ -50,7 +50,7 @@ function RootComponent() {
       <div id="sidebar">
         <SidebarFooter />
         <SidebarSearchContact query={query} setQuery={setQuery} />
-        <SidebarContactList contacts={contacts} />
+        <SidebarContactList />
       </div>
       <div id="detail" className={router.state.isLoading ? 'loading' : ''}>
         <Outlet />

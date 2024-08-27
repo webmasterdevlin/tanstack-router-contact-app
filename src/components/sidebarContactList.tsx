@@ -1,11 +1,9 @@
 import { Link } from '@tanstack/react-router';
-import { Contact } from '../models.ts';
+import { Route } from '../routes/__root.tsx';
 
-type Props = {
-  contacts: Contact[];
-};
+export default function SidebarContactList() {
+  const { contacts } = Route.useLoaderData();
 
-export default function SidebarContactList({ contacts }: Props) {
   return (
     <nav>
       {contacts.length ? (

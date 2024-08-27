@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
-import { createContact } from '../services/contacts.ts';
 import { Route } from '../routes/__root.tsx';
 import { useRouter } from '@tanstack/react-router';
+import { createContact } from '../services/contacts.ts';
 
 type Props = {
   query: string;
