@@ -14,10 +14,5 @@ export const Route = createFileRoute('/contacts/$contactId/edit')({
 });
 
 function EditContactComponent() {
-  return (
-    <>
-      <h2>Editing</h2>
-      <EditContactForm />
-    </>
-  );
+  return (<EditContactForm />);
 }

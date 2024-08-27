@@ -100,6 +100,12 @@ const TanStackRouterDevtools =
 ```tsx
 <SidebarSearchContact />
 ```
+- [x] open the chrome devtools and go to the `Application` tab
+- [x] go to the indexedDB of the application
+- [x] go the web app and click the `New` button that will trigger the `createContact` function.
+- [x] confirm that the new contact is added to the indexedDB
+
+## Showing the list of contacts
 
 - [x] update the `RootRouteOptions` of the `__root.tsx` file.
 ```tsx
@@ -120,3 +126,81 @@ export const Route = createRootRoute({
   },
 });
 ```
+- [x] add the `<SidebarContactList />` below the SidebarSearchContact component.
+```tsx
+<SidebarContactList />
+```
+- [x] see the changes in the browser. It says **no contacts**.
+- [x] replace the placeholder of contacts with the `Route` instance from the `__root.tsx` file.
+```tsx
+const { contacts } = Route.useLoaderData();
+```
+- [x] see the changes in the browser. It should now show the list of contacts with one object (no name).
+
+## Creating a navigation functionality
+- [x] create a new page named `contacts.$contactId.index.tsx` inside the `routes` folder.
+- [x] save and check the `routeTree.gen.ts` file. It should have the new route.
+- [x] change the `ahref tag` to use the `Link` component from TanStack Router.
+```tsx
+<Link to={`/contacts/`}></Link>
+```
+- [x] hover over the to prop and see the type of the prop. It should be a set of union type of strings.
+- [x] update the `Link` with this.
+```tsx
+<Link to={`/contacts/${contact.id}`}></Link>
+```
+- [x] go to the browser and click on the contact. It should navigate to the empty contact detail page.
+
+## Adding the Contact Detail functionality
+
+- [x] update the `contacts.$contactId.index.tsx` file to show the contact details.
+```tsx
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { z } from 'zod';
+
+import { getContact } from '../services/contacts.ts';
+import ContactDetail from '../components/ContactDetail.tsx';
+import NotFoundPage from '../components/NotFoundPage.tsx';
+import ErrorPage from '../components/ErrorPage.tsx';
+
+export const Route = createFileRoute('/contacts/$contactId/')({
+  component: () => <div>Hello /contacts/$contactId/!</div>,
+  notFoundComponent: () => <NotFoundPage message={"Can't find contact"} />,
+  errorComponent: () => <ErrorPage message={'Network error'} />,
+  params: {
+    parse: (params) => {
+      return {
+        contactId: z.string().parse(params.contactId),
+      };
+    },
+    stringify: ({ contactId }) => {
+      return { contactId: `${contactId}` };
+    },
+  },
+  // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  loader: async ({ params: { contactId } }) => {
+    const contact = await getContact(contactId as string);
+    if (!contact) {
+      throw notFound({ _global: false });
+    }
+
+    return contact;
+  },
+});
+```
+- [x] In the same file, separate the component and import the `ContactDetail` component like this:
+```tsx
+function ContactIdIndexComponent() {
+  return (<ContactDetail />);
+}
+```
+- [x] Still in the same file, update the component prop of the Route instance to use the `ContactIdIndexComponent` function.
+```tsx
+  component: ContactIdIndexComponent,
+```
+- [x] go to the `ContactDetail.tsx` and replace the contact placeholder with the `Route` instance from the `contacts.$contactId.index.tsx` file.
+```tsx
+const contact = Route.useLoaderData();
+```
+
+## Adding delete functionality
