@@ -18,12 +18,15 @@ function RootComponent() {
     );
 }
 ```
-- [x] place `TanStackRouterVite()` in the vite.config.ts' plugins
-- [x] generate the `routeTree.gen.ts` using TanStack Router CLI
-```zsh
-npm i -g @tanstack/react-router-cli 
+- [x] import and add `TanStackRouterVite()` in vite.config.ts's `plugins` array
+```ts
+- [x] install TanStack Router CLI
+```bash
+npm i -g @tanstack/router-cli
 ```
-```zsh
+- [x] run the TanStack Router CLI to generate `routeTree.gen.ts` file
+```bash
 tsr generate
 ```
-
+- [x] finish the `App.tsx` file
+- [x] 
