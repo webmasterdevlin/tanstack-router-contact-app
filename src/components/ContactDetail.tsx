@@ -1,7 +1,7 @@
 import { Route } from '../routes/contacts.$contactId.index.tsx';
 import { FormEvent } from 'react';
 import { deleteContact } from '../services/contacts.ts';
-import Favorite from './favorite.tsx';
+import Favorite from './Favorite.tsx';
 
 export default function ContactDetail() {
   const contact = Route.useLoaderData();

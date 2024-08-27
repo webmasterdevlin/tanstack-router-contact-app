@@ -2,9 +2,9 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 import { z } from 'zod';
 
 import { getContact } from '../services/contacts.ts';
-import ContactDetail from '../components/contactDetail.tsx';
-import NotFoundPage from '../components/notFoundPage.tsx';
-import ErrorPage from '../components/errorPage.tsx';
+import ContactDetail from '../components/ContactDetail.tsx';
+import NotFoundPage from '../components/NotFoundPage.tsx';
+import ErrorPage from '../components/ErrorPage.tsx';
 
 export const Route = createFileRoute('/contacts/$contactId/')({
   component: ContactIdIndexComponent,

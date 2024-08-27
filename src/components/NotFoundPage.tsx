@@ -1,4 +1,4 @@
-export default function NotFoundPage({ message }: { message: string }) {
+export default function NotFoundPage({ message }: { message?: string }) {
   return (
     <div id="error-page">
       <h1>Oops!</h1>

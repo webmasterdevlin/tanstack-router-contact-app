@@ -3,9 +3,9 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { z } from 'zod';
 import { getContacts } from '../services/contacts.ts';
 import { Contact } from '../models.ts';
-import SidebarFooter from '../components/sidebarFooter.tsx';
-import SidebarSearchContact from '../components/sidebarSearchContact.tsx';
-import SidebarContactList from '../components/sidebarContactList.tsx';
+import SidebarFooter from '../components/SidebarFooter.tsx';
+import SidebarSearchContact from '../components/SidebarSearchContact.tsx';
+import SidebarContactList from '../components/SidebarContactList.tsx';
 
 export const Route = createRootRoute({
   component: RootComponent,
