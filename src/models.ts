@@ -3,5 +3,5 @@ export type Contact = {
   first?: string;
   last?: string;
   createdAt: number;
-  [key: string]: any;
+  favorite: boolean;
 };

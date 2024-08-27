@@ -8,7 +8,7 @@ type FavoriteProps = {
 };
 
 const Favorite = ({ contact }: FavoriteProps) => {
-  let favorite = contact['favorite'];
+  let favorite = contact.favorite;
   const router = useRouter();
 
   return (
