@@ -138,8 +138,8 @@ const { contacts } = Route.useLoaderData();
 - [x] see the changes in the browser. It should now show the list of contacts with one object (no name).
 
 ## Creating a navigation functionality
-- [x] create a new page named `contacts.$contactId.index.tsx` inside the `routes` folder.
-- [x] save and check the `routeTree.gen.ts` file. It should have the new route.
+- [x] create a new page named `contacts.$contactId.index.tsx` inside the `routes` folder then save the file to reload your IDE.
+- [x] check the `routeTree.gen.ts` file. It should have the new route.
 - [x] change the `ahref tag` to use the `Link` component from TanStack Router.
 ```tsx
 <Link to={`/contacts/`}></Link>
@@ -204,3 +204,57 @@ const contact = Route.useLoaderData();
 ```
 
 ## Adding delete functionality
+
+- [x] replace the params placeholder with this:
+```tsx
+const params = Route.useParams();
+```
+- [x] add the the **Route's** `useNavigate` hook to the component.
+```tsx
+const navigate = Route.useNavigate();
+```
+- [x] update the **handleDelete** function to use the **params** and  **navigate** function.
+```tsx
+  const handleDeleteEvent = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (globalThis.confirm('Please confirm you want to delete this record.')) {
+      await deleteContact(params.contactId);
+      await navigate({
+        to: '/',
+      });
+    }
+  };
+```
+- [x] go to the browser and click on the delete button. It should delete the contact and navigate to the home page.
+- [x] add more contacts and delete them to see the changes in the browser.
+
+## Adding the Edit functionality
+- [x] create a new page named `contacts.$contactId.edit.tsx` inside the `routes` folder then save the file to reload your IDE.
+- [x] update the `contacts.$contactId.edit.tsx` file to fetch the contact details.
+```tsx
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { getContact } from '../services/contacts.ts';
+import EditContactForm from '../components/EditContactForm.tsx';
+
+export const Route = createFileRoute('/contacts/$contactId/edit')({
+  component: () => <div>Hello /contacts/$contactId/edit!</div>,
+  loader: async ({ params: { contactId } }) => {
+    const contact = await getContact(contactId);
+    if (!contact) {
+      throw notFound({ _global: false });
+    }
+    return contact;
+  },
+});
+```
+- [x] In the same file, separate the component and import the `EditContactForm` component like this:
+```tsx
+function EditContactComponent() {
+  return (<EditContactForm />);
+}
+```
+- [x] Still in the same file, update the component prop of the Route instance to use the `EditContactComponent` function.
+```tsx
+  component: EditContactComponent,
+```
+- [x] we will need again the 

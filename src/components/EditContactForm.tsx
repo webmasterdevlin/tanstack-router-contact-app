@@ -1,12 +1,11 @@
 import { FormEvent } from 'react';
-import { useNavigate } from '@tanstack/react-router';
 import { updateContact } from '../services/contacts.ts';
 import { Route } from '../routes/contacts.$contactId.edit.tsx';
 
 export default function EditContactForm() {
   const contact = Route.useLoaderData();
   const params = Route.useParams();
-  const navigate = useNavigate();
+  const navigate = Route.useNavigate();
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
