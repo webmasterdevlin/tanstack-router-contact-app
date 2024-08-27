@@ -3,5 +3,8 @@ export type Contact = {
   first?: string;
   last?: string;
   createdAt: number;
-  favorite: boolean;
+  favorite?: boolean;
+  avatar?: string;
+  twitter?: string;
+  notes?: string;
 };
