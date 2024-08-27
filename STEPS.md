@@ -1,4 +1,7 @@
 # Steps in building the project from the starter repo
+
+## Setting up the routes
+
 - [x] download the starter repo
 - [x] npm install
 - [x] create a folder named `routes` inside the `src` folder
@@ -41,81 +44,79 @@ npm run dev
 - [x] update the `__root.tsx` file to add the `Outlet` component.
 ```tsx
 <>
-  <Outlet />
+  <div id="detail">
+    <Outlet />
+  </div>
 </>
 ```
+- [x] see the changes in the browser
+
+## Adding the TanStack Router Devtools
+
 - [x] update the `__root.tsx` file to add the `TanStackRouterDevtools` component.
 ```tsx
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === 'production'
+    ? () => null // Render nothing in production
+    : lazy(() =>
+        // Lazy load in development
+        import('@tanstack/router-devtools').then((res) => ({
+          default: res.TanStackRouterDevtools,
+          // For Embedded Mode
+          // default: res.TanStackRouterDevtoolsPanel
+        }))
+      );
+```
+ - [x] then above the RootComponent function, add the following code:
+```tsx
 <>
-  <Outlet />
+  <div id="detail">
+    <Outlet />
+  </div>
   <Suspense>
     <TanStackRouterDevtools position="bottom-right" />
   </Suspense>
 </>
 ```
+- [x] see the changes in the browser
+
+## Adding New Contact functionality
+
 - [x] update the `__root.tsx` file to add sidebar and the list of contacts.
 ```tsx
-  <>
-      <div id="sidebar">
-        <h1>
-          <a href="https://reactrouter.com/main/start/tutorial" target="_blank">
-            React Router's Tutorial
-          </a>
-        </h1>
-        <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              className={router.state.isLoading ? 'loading' : ''}
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-              value={query}
-              onChange={handleOnChangeEvent}
-            />
-            <div
-              id="search-spinner"
-              hidden={!router.state.isLoading}
-              aria-hidden
-            />
-            <div className="sr-only" aria-live="polite"></div>
-          </form>
-          <form onSubmit={action}>
-            <button type="submit">New</button>
-          </form>
-        </div>
+<>
+  <div id="sidebar">
+    <SidebarFooter />
+  </div>
+  <div id="detail">
+    <Outlet />
+  </div>
+  <Suspense>
+    <TanStackRouterDevtools position="bottom-right" />
+  </Suspense>
+</>
+```
+- [x] import and place the `<SidebarSearchContact />` below the SideBarFooter component.
+```tsx
+<SidebarSearchContact />
+```
 
-        <nav>
-          {contacts.length ? (
-            <ul>
-              {contacts.map((contact) => (
-                <li key={contact.id}>
-                  <Link to={`/contacts/${contact.id}`}>
-                    {contact.first || contact.last ? (
-                      <>
-                        {contact.first} {contact.last}
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}{' '}
-                    {contact.favorite && <span>★</span>}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No contacts</i>
-            </p>
-          )}
-        </nav>
-      </div>
-      <div id="detail" className={router.state.isLoading ? 'loading' : ''}>
-        <Outlet />
-      </div>
-      <Suspense>
-        <TanStackRouterDevtools position="bottom-right" />
-      </Suspense>
-    </>
+- [x] update the `RootRouteOptions` of the `__root.tsx` file.
+```tsx
+export const Route = createRootRoute({
+  component: RootComponent,
+  validateSearch: z.object({
+    q: z.string().optional(),
+  }),
+  // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  loaderDeps: ({ search: { q } }) => {
+    return { q };
+  },
+  // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  loader: async ({ deps: { q } }) => {
+    const contacts = (await getContacts(q || '')) as Contact[];
+
+    return { contacts, q };
+  },
+});
 ```

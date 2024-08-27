@@ -38,8 +38,8 @@ const TanStackRouterDevtools =
 
 function RootComponent() {
   const { q } = Route.useLoaderData();
-  const router = useRouter();
   const [query, setQuery] = useState(q ?? '');
+  const router = useRouter();
 
   useEffect(() => {
     if (q) setQuery(q);

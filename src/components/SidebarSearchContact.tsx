@@ -30,13 +30,13 @@ export default function SidebarSearchContact({ query, setQuery }: Props) {
       <form id="search-form" role="search">
         <input
           id="q"
-          className={router.state.isLoading ? 'loading' : ''}
           aria-label="Search contacts"
           placeholder="Search"
           type="search"
           name="q"
-          value={query}
           onChange={handleOnChangeEvent}
+          value={query}
+          className={router.state.isLoading ? 'loading' : ''}
         />
         <div id="search-spinner" hidden={!router.state.isLoading} aria-hidden />
         <div className="sr-only" aria-live="polite"></div>
