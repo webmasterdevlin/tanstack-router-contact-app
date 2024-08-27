@@ -290,7 +290,85 @@ function EditContactComponent() {
     });
   };
 ```
-- [x] go back also to the `SidebarSearchContact.tsx` file and add this hook to the component.
+- [x] go back also to the `SidebarSearchContact.tsx` file. Import the `Route` from the `__root.tsx` and add this hook to the component.
 ```tsx
   const navigate = Route.useNavigate();
 ```
+- [x] update the `handleOnSubmit` with this logic.
+```tsx
+const contact = await createContact();
+    await navigate({
+      to: `/contacts/${contact.id}/edit`,
+    });
+```
+- [x] add this inside the `onClick` event of the cancel button.
+```tsx
+ navigate({
+              to: `/contacts/${contact.id}`,
+            })
+```
+- [x] go to the browser and click the **New** button. It should navigate to the edit form of the new contact.
+
+## Adding search functionality
+
+- [x] go to the `__root.tsx` file and the hooks:
+```tsx
+  const { q } = Route.useLoaderData();
+  const [query, setQuery] = useState(q ?? '');
+  const router = useRouter();
+
+  useEffect(() => {
+    if (q) setQuery(q);
+  }, [q]);
+  ```
+  - [x] update the `div` tag of the `<Outlet />` with this:
+```tsx
+<div id="detail" className={router.state.isLoading ? 'loading' : ''}>
+        <Outlet />
+</div>
+```
+- [x] add `query` and `setQuery` props to the **SidebarSearchContact** component.
+```tsx
+<SidebarSearchContact query={query} setQuery={setQuery} />
+```
+- [x] go to the `SidebarSearchContact.tsx` file and add the props to the component.
+```tsx
+function SidebarSearchContact({ query, setQuery }: Props)
+```
+- [x] update the `handleOnChangeEvent` function with this:
+```tsx
+  const handleOnChangeEvent = async (e: FormEvent<HTMLInputElement>) => {
+    setQuery(e.currentTarget.value);
+    await navigate({ search: { q: e.currentTarget.value } });
+  };
+  ```
+- [x] import the `useRouter` hook to the component.
+```tsx
+  const router = useRouter();
+```
+- [x] add two more properties to the `input` tag.
+```tsx
+value={query}
+className={router.state.isLoading ? 'loading' : ''}
+```
+- [x] replace the **hidden** property of the `div` tag with an id `id="search-spinner"` with this:
+```tsx
+hidden={!router.state.isLoading}
+```
+- [x] go to the browser and type a name in the search bar. It should show the loading spinner and the list of contacts.
+
+## Adding the star functionality
+- [x] go to the `Favorite.tsx` file and add the `useRouter` hook.
+```tsx
+const router = useRouter();
+```
+- then update the `onSubmit` function with this after or below the `updateContact` function. The invalidation will trigger the loader to fetch the data again.:
+```tsx
+await router.invalidate();
+```
+
+## End of the TanStack Router Tutorial
+
+- Thank you for following the steps. You can now explore more of the TanStack Router features and functionalities.
+- [x] You can also check the [TanStack Router documentation](https://tanstack.com/router/latest) for more information.
+- [x] Happy coding! 🚀
