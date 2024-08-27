@@ -19,14 +19,22 @@ function RootComponent() {
 }
 ```
 - [x] import and add `TanStackRouterVite()` in vite.config.ts's `plugins` array
-```ts
 - [x] install TanStack Router CLI
 ```bash
 npm i -g @tanstack/router-cli
-```
+``` 
 - [x] run the TanStack Router CLI to generate `routeTree.gen.ts` file
 ```bash
 tsr generate
+```
+The tsr generate command will generate a `routeTree.gen.ts` file in the `src` folder. Normally in React Router, we would have to manually create the routes and nested routes. But with TanStack Router, we can generate the routes and nested routes using the CLI.
+- [x] run the tsr watcher to watch for changes in the `routeTree.gen.ts` file
+```bash
+tsr watch
+```
+- [x] run the project
+```bash
+npm run dev
 ```
 - [x] finish the `App.tsx` file
 - [x] 
