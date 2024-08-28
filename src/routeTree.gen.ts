@@ -10,53 +10,53 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as ContactsContactIdIndexImport } from './routes/contacts.$contactId.index'
-import { Route as ContactsContactIdEditImport } from './routes/contacts.$contactId.edit'
+import { Route as rootRoute } from './routes/__root';
+import { Route as IndexImport } from './routes/index';
+import { Route as ContactsContactIdIndexImport } from './routes/contacts.$contactId.index';
+import { Route as ContactsContactIdEditImport } from './routes/contacts.$contactId.edit';
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ContactsContactIdIndexRoute = ContactsContactIdIndexImport.update({
   path: '/contacts/$contactId/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ContactsContactIdEditRoute = ContactsContactIdEditImport.update({
   path: '/contacts/$contactId/edit',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/contacts/$contactId/edit': {
-      id: '/contacts/$contactId/edit'
-      path: '/contacts/$contactId/edit'
-      fullPath: '/contacts/$contactId/edit'
-      preLoaderRoute: typeof ContactsContactIdEditImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/contacts/$contactId/edit';
+      path: '/contacts/$contactId/edit';
+      fullPath: '/contacts/$contactId/edit';
+      preLoaderRoute: typeof ContactsContactIdEditImport;
+      parentRoute: typeof rootRoute;
+    };
     '/contacts/$contactId/': {
-      id: '/contacts/$contactId/'
-      path: '/contacts/$contactId'
-      fullPath: '/contacts/$contactId'
-      preLoaderRoute: typeof ContactsContactIdIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/contacts/$contactId/';
+      path: '/contacts/$contactId';
+      fullPath: '/contacts/$contactId';
+      preLoaderRoute: typeof ContactsContactIdIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -66,7 +66,7 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   ContactsContactIdEditRoute,
   ContactsContactIdIndexRoute,
-})
+});
 
 /* prettier-ignore-end */
 
