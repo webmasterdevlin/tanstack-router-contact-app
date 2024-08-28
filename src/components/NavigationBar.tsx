@@ -1,4 +1,4 @@
-import {Link, useNavigate} from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router';
 
 export default function NavigationBar() {
   const navigate = useNavigate();

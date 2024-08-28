@@ -32,5 +32,5 @@ export const Route = createFileRoute('/contacts/$contactId/')({
 });
 
 function ContactIdIndexComponent() {
-  return (<ContactDetail />);
+  return <ContactDetail />;
 }
