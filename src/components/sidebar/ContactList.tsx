@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
-import { Route } from '../routes/__root.tsx';
+import { Route } from '../../routes/__root.tsx';
 
-export default function SidebarContactList() {
+export default function ContactList() {
   const { contacts } = Route.useLoaderData();
 
   return (

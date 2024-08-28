@@ -1,4 +1,4 @@
-export default function SidebarFooter() {
+export default function Footer() {
   return (
     <h1>
       <a href="https://reactrouter.com/main/start/tutorial" target="_blank">
