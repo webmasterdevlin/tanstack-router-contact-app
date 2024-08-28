@@ -1,14 +1,14 @@
 import { FormEvent } from 'react';
-import { Route } from '../../routes/__root.tsx';
+import { Route } from '../routes/__root.tsx';
 import { useRouter } from '@tanstack/react-router';
-import { createContact } from '../../services/contacts.ts';
+import { createContact } from '../services/contacts.ts';
 
 type Props = {
   query: string;
   setQuery: (query: string) => void;
 };
 
-export default function SearchContact({ query, setQuery }: Props) {
+export default function SidebarSearchContact({ query, setQuery }: Props) {
   const navigate = Route.useNavigate();
   const router = useRouter();
 

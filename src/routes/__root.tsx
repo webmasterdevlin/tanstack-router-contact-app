@@ -3,9 +3,9 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { z } from 'zod';
 import { getContacts } from '../services/contacts.ts';
 import { Contact } from '../models.ts';
-import Footer from '../components/sidebar/Footer.tsx';
-import SearchContact from '../components/sidebar/SearchContact.tsx';
-import ContactList from '../components/sidebar/ContactList.tsx';
+import SidebarFooter from '../components/SidebarFooter.tsx';
+import SidebarSearchContact from '../components/SidebarSearchContact.tsx';
+import SidebarContactList from '../components/SidebarContactList.tsx';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -48,9 +48,9 @@ function RootComponent() {
   return (
     <>
       <div id="sidebar">
-        <Footer />
-        <SearchContact query={query} setQuery={setQuery} />
-        <ContactList />
+        <SidebarFooter />
+        <SidebarSearchContact query={query} setQuery={setQuery} />
+        <SidebarContactList />
       </div>
       <div id="detail" className={router.state.isLoading ? 'loading' : ''}>
         <Outlet />
