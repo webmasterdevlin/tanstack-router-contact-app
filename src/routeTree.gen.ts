@@ -62,11 +62,49 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  ContactsContactIdEditRoute,
-  ContactsContactIdIndexRoute,
-})
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
+  '/contacts/$contactId': typeof ContactsContactIdIndexRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
+  '/contacts/$contactId': typeof ContactsContactIdIndexRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
+  '/contacts/$contactId/': typeof ContactsContactIdIndexRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/contacts/$contactId/edit' | '/contacts/$contactId'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/contacts/$contactId/edit' | '/contacts/$contactId'
+  id: '__root__' | '/' | '/contacts/$contactId/edit' | '/contacts/$contactId/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  ContactsContactIdEditRoute: typeof ContactsContactIdEditRoute
+  ContactsContactIdIndexRoute: typeof ContactsContactIdIndexRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  ContactsContactIdEditRoute: ContactsContactIdEditRoute,
+  ContactsContactIdIndexRoute: ContactsContactIdIndexRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
