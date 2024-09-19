@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
-import { updateContact } from '../services/contacts.ts';
-import { Route } from '../routes/contacts.$contactId.edit.tsx';
+import { updateContact } from '../services/contacts';
+import { Route } from '../routes/contacts.$contactId.edit';
 
 export default function EditContactForm() {
   const contact = Route.useLoaderData();

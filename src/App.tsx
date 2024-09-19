@@ -1,8 +1,8 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 
 import { routeTree } from './routeTree.gen';
-import ErrorPage from './components/ErrorPage.tsx';
-import NotFoundPage from './components/NotFoundPage.tsx';
+import ErrorPage from './components/ErrorPage';
+import NotFoundPage from './components/NotFoundPage';
 
 const router = createRouter({
   defaultPreload: 'intent', // Preloading by "intent" works by using hover and touch start events on <Link> components to preload the dependencies for the destination route.

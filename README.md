@@ -163,10 +163,10 @@ const { contacts } = Route.useLoaderData();
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { z } from 'zod';
 
-import { getContact } from '../services/contacts.ts';
-import ContactDetail from '../components/ContactDetail.tsx';
-import NotFoundPage from '../components/NotFoundPage.tsx';
-import ErrorPage from '../components/ErrorPage.tsx';
+import { getContact } from '../services/contacts';
+import ContactDetail from '../components/ContactDetail';
+import NotFoundPage from '../components/NotFoundPage';
+import ErrorPage from '../components/ErrorPage';
 
 export const Route = createFileRoute('/contacts/$contactId/')({
   component: () => <div>Hello /contacts/$contactId/!</div>,
@@ -238,8 +238,8 @@ const navigate = Route.useNavigate();
 - [x] update the `contacts.$contactId.edit.tsx` file to fetch the contact details.
 ```tsx
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { getContact } from '../services/contacts.ts';
-import EditContactForm from '../components/EditContactForm.tsx';
+import { getContact } from '../services/contacts';
+import EditContactForm from '../components/EditContactForm';
 
 export const Route = createFileRoute('/contacts/$contactId/edit')({
   component: () => <div>Hello /contacts/$contactId/edit!</div>,

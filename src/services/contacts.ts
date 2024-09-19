@@ -1,7 +1,7 @@
 import localforage from 'localforage';
 import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
-import { Contact } from '../models.ts';
+import { Contact } from '../models';
 
 async function getContacts(query?: string): Promise<Contact[]> {
   await fakeNetwork(`getContacts:${query}`);

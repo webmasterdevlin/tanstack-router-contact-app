@@ -1,6 +1,6 @@
-import { Contact } from '../models.ts';
+import { Contact } from '../models';
 import React from 'react';
-import { updateContact } from '../services/contacts.ts';
+import { updateContact } from '../services/contacts';
 import { useRouter } from '@tanstack/react-router';
 
 type FavoriteProps = {

@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { getContact } from '../services/contacts.ts';
-import EditContactForm from '../components/EditContactForm.tsx';
+import { getContact } from '../services/contacts';
+import EditContactForm from '../components/EditContactForm';
 
 export const Route = createFileRoute('/contacts/$contactId/edit')({
   component: EditContactComponent,

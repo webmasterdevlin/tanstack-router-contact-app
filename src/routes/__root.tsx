@@ -1,11 +1,11 @@
 import { createRootRoute, Outlet, useRouter } from '@tanstack/react-router';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { z } from 'zod';
-import { getContacts } from '../services/contacts.ts';
-import { Contact } from '../models.ts';
-import SidebarFooter from '../components/SidebarFooter.tsx';
-import SidebarSearchContact from '../components/SidebarSearchContact.tsx';
-import SidebarContactList from '../components/SidebarContactList.tsx';
+import { getContacts } from '../services/contacts';
+import { Contact } from '../models';
+import SidebarFooter from '../components/SidebarFooter';
+import SidebarSearchContact from '../components/SidebarSearchContact';
+import SidebarContactList from '../components/SidebarContactList';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -28,13 +28,13 @@ const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => null // Render nothing in production
     : lazy(() =>
-        // Lazy load in development
-        import('@tanstack/router-devtools').then((res) => ({
-          default: res.TanStackRouterDevtools,
-          // For Embedded Mode
-          // default: res.TanStackRouterDevtoolsPanel
-        }))
-      );
+      // Lazy load in development
+      import('@tanstack/router-devtools').then((res) => ({
+        default: res.TanStackRouterDevtools,
+        // For Embedded Mode
+        // default: res.TanStackRouterDevtoolsPanel
+      }))
+    );
 
 function RootComponent() {
   const { q } = Route.useLoaderData();
