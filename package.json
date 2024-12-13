@@ -7,6 +7,10 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
+    "prisma.studio": "npx prisma studio",
+    "prisma.seed": "tsx prisma/seed.ts",
+    "prisma.migrate": "npx prisma migrate dev",
+    "prisma.push": "npx prisma db push",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -22,6 +26,7 @@
     "vinxi": "^0.5.1"
   },
   "devDependencies": {
+    "@prisma/client": "^6.0.1",
     "@tanstack/router-cli": "^1.87.7",
     "@tanstack/router-devtools": "^1.87.12",
     "@types/node": "^22.10.2",
@@ -42,6 +47,7 @@
     "globals": "^15.13.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "prisma": "^6.0.1",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.0",
     "vite": "^6.0.3",
