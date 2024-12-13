@@ -1,0 +1,66 @@
+{
+  "_contacts-DoWpUKty.js": {
+    "file": "assets/contacts-DoWpUKty.js",
+    "name": "contacts"
+  },
+  "_ssr-BPHchSOx.js": {
+    "file": "assets/ssr-BPHchSOx.js",
+    "name": "ssr",
+    "dynamicImports": [
+      "app/routes/about.tsx?tsr-split",
+      "app/routes/index.tsx?tsr-split",
+      "app/routes/profile/settings.tsx?tsr-split",
+      "app/routes/contacts.$contactId.index.tsx?tsr-split",
+      "app/routes/contacts.$contactId.index.tsx?tsr-split",
+      "app/routes/contacts.$contactId.edit.tsx?tsr-split",
+      "app/routes/contacts.$contactId.edit.tsx?tsr-split"
+    ]
+  },
+  "app/routes/about.tsx?tsr-split": {
+    "file": "assets/about-CpGDTWru.js",
+    "name": "about",
+    "src": "app/routes/about.tsx?tsr-split",
+    "isDynamicEntry": true
+  },
+  "app/routes/contacts.$contactId.edit.tsx?tsr-split": {
+    "file": "assets/contacts._contactId.edit-02zvbxDx.js",
+    "name": "contacts._contactId.edit",
+    "src": "app/routes/contacts.$contactId.edit.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_contacts-DoWpUKty.js",
+      "_ssr-BPHchSOx.js"
+    ]
+  },
+  "app/routes/contacts.$contactId.index.tsx?tsr-split": {
+    "file": "assets/contacts._contactId.index-BMreN9tO.js",
+    "name": "contacts._contactId.index",
+    "src": "app/routes/contacts.$contactId.index.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_contacts-DoWpUKty.js",
+      "_ssr-BPHchSOx.js"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split": {
+    "file": "assets/index-hzFDNqBm.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split",
+    "isDynamicEntry": true
+  },
+  "app/routes/profile/settings.tsx?tsr-split": {
+    "file": "assets/settings-Jpq5jLzu.js",
+    "name": "settings",
+    "src": "app/routes/profile/settings.tsx?tsr-split",
+    "isDynamicEntry": true
+  },
+  "virtual:$vinxi/handler/ssr": {
+    "file": "ssr.js",
+    "name": "ssr",
+    "src": "virtual:$vinxi/handler/ssr",
+    "isEntry": true,
+    "imports": [
+      "_ssr-BPHchSOx.js"
+    ]
+  }
+}

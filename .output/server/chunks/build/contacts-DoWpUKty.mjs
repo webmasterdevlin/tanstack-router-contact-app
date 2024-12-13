@@ -1,0 +1,27 @@
+import o from 'localforage';
+
+async function u(t) {
+  return await i(`contact:${t}`), (await o.getItem("contacts") || []).find((n) => n.id === t), { id: "1", first: "John", last: "Doe", createdAt: 16263432e5, favorite: true, avatar: "https://randomuser.me/api/portraits", twitter: "@johndoe", notes: "This is a note" };
+}
+async function d(t, a) {
+  await i();
+  const n = await o.getItem("contacts") || [], e = n.find((s) => s.id === t);
+  if (!e) throw new Error(`No contact found for id: ${t}`);
+  return Object.assign(e, a), await r(n), e;
+}
+async function w(t) {
+  const a = await o.getItem("contacts") || [], n = a.findIndex((e) => e.id === t);
+  return n > -1 ? (a.splice(n, 1), await r(a), true) : false;
+}
+function r(t) {
+  return o.setItem("contacts", t);
+}
+let c = {};
+async function i(t) {
+  if (t || (c = {}), !(t && c[t]) && t) return c[t] = true, new Promise((a) => {
+    setTimeout(a, Math.random() * 800);
+  });
+}
+
+export { d, u, w };
+//# sourceMappingURL=contacts-DoWpUKty.mjs.map

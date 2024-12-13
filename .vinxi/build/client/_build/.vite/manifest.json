@@ -1,0 +1,78 @@
+{
+  "_client-BbH3N5Po.js": {
+    "file": "assets/client-BbH3N5Po.js",
+    "name": "client",
+    "dynamicImports": [
+      "app/routes/about.tsx?tsr-split",
+      "app/routes/index.tsx?tsr-split",
+      "app/routes/profile/settings.tsx?tsr-split",
+      "app/routes/contacts.$contactId.index.tsx?tsr-split",
+      "app/routes/contacts.$contactId.index.tsx?tsr-split",
+      "app/routes/contacts.$contactId.edit.tsx?tsr-split",
+      "app/routes/contacts.$contactId.edit.tsx?tsr-split"
+    ]
+  },
+  "_contacts-afs_pgEK.js": {
+    "file": "assets/contacts-afs_pgEK.js",
+    "name": "contacts",
+    "imports": [
+      "_client-BbH3N5Po.js"
+    ]
+  },
+  "app/routes/about.tsx?tsr-split": {
+    "file": "assets/about-BJ-2WOTg.js",
+    "name": "about",
+    "src": "app/routes/about.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js"
+    ]
+  },
+  "app/routes/contacts.$contactId.edit.tsx?tsr-split": {
+    "file": "assets/contacts._contactId.edit-Vw9S2yai.js",
+    "name": "contacts._contactId.edit",
+    "src": "app/routes/contacts.$contactId.edit.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js",
+      "_contacts-afs_pgEK.js"
+    ]
+  },
+  "app/routes/contacts.$contactId.index.tsx?tsr-split": {
+    "file": "assets/contacts._contactId.index-Co7gbx2P.js",
+    "name": "contacts._contactId.index",
+    "src": "app/routes/contacts.$contactId.index.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js",
+      "_contacts-afs_pgEK.js"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split": {
+    "file": "assets/index-CCvct0mt.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js"
+    ]
+  },
+  "app/routes/profile/settings.tsx?tsr-split": {
+    "file": "assets/settings-BK4whTGZ.js",
+    "name": "settings",
+    "src": "app/routes/profile/settings.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-BszfEbDQ.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_client-BbH3N5Po.js"
+    ]
+  }
+}

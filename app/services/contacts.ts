@@ -4,13 +4,36 @@ import sortBy from 'sort-by';
 import { Contact } from '../models';
 
 async function getContacts(query?: string): Promise<Contact[]> {
-  await fakeNetwork(`getContacts:${query}`);
-  let contacts: Contact[] =
-    (await localforage.getItem<Contact[]>('contacts')) || [];
-  if (query) {
-    contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
-  }
-  return contacts.sort(sortBy('last', 'createdAt'));
+  // await fakeNetwork(`getContacts:${query}`);
+  // let contacts: Contact[] =
+  //   (await localforage.getItem<Contact[]>('contacts')) || [];
+  // if (query) {
+  //   contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
+  // }
+  // return contacts.sort(sortBy('last', 'createdAt'));
+  // model Contact below
+  // {
+  //   id: string;
+  //   first?: string;
+  //   last?: string;
+  //   createdAt: number;
+  //   favorite?: boolean;
+  //   avatar?: string;
+  //   twitter?: string;
+  //   notes?: string;
+  // };
+  return [
+    {
+      id: '1',
+      first: 'John',
+      last: 'Doe',
+      createdAt: 1626343200000,
+      favorite: true,
+      avatar: 'https://randomuser.me/api/portraits',
+      twitter: '@johndoe',
+      notes: 'This is a note',
+    },
+  ];
 }
 
 async function createContact(): Promise<Contact> {
@@ -28,7 +51,16 @@ async function getContact(id: string): Promise<Contact | null> {
   const contacts: Contact[] =
     (await localforage.getItem<Contact[]>('contacts')) || [];
   const contact = contacts.find((contact) => contact.id === id);
-  return contact ?? null;
+  return {
+    id: '1',
+    first: 'John',
+    last: 'Doe',
+    createdAt: 1626343200000,
+    favorite: true,
+    avatar: 'https://randomuser.me/api/portraits',
+    twitter: '@johndoe',
+    notes: 'This is a note',
+  };
 }
 
 async function updateContact(

@@ -1,0 +1,6 @@
+const e = function() {
+  return React.createElement("p", { id: "zero-state" }, "This is a demo for TanStack Router.", React.createElement("br", null), "Check out", " ", React.createElement("a", { href: "https://tanstack.com/router" }, "the docs at tanstack.com/router"), ".");
+};
+
+export { e as component };
+//# sourceMappingURL=index-hzFDNqBm.mjs.map

@@ -11,15 +11,29 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ContactsContactIdIndexImport } from './routes/contacts.$contactId.index'
 import { Route as ContactsContactIdEditImport } from './routes/contacts.$contactId.edit'
 
 // Create/Update Routes
 
+const AboutRoute = AboutImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileSettingsRoute = ProfileSettingsImport.update({
+  id: '/profile/settings',
+  path: '/profile/settings',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,6 +60,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/settings': {
+      id: '/profile/settings'
+      path: '/profile/settings'
+      fullPath: '/profile/settings'
+      preLoaderRoute: typeof ProfileSettingsImport
+      parentRoute: typeof rootRoute
+    }
     '/contacts/$contactId/edit': {
       id: '/contacts/$contactId/edit'
       path: '/contacts/$contactId/edit'
@@ -67,12 +95,16 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId': typeof ContactsContactIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId': typeof ContactsContactIdIndexRoute
 }
@@ -80,27 +112,49 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId/': typeof ContactsContactIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacts/$contactId/edit' | '/contacts/$contactId'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/profile/settings'
+    | '/contacts/$contactId/edit'
+    | '/contacts/$contactId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacts/$contactId/edit' | '/contacts/$contactId'
-  id: '__root__' | '/' | '/contacts/$contactId/edit' | '/contacts/$contactId/'
+  to:
+    | '/'
+    | '/about'
+    | '/profile/settings'
+    | '/contacts/$contactId/edit'
+    | '/contacts/$contactId'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/profile/settings'
+    | '/contacts/$contactId/edit'
+    | '/contacts/$contactId/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRoute
   ContactsContactIdEditRoute: typeof ContactsContactIdEditRoute
   ContactsContactIdIndexRoute: typeof ContactsContactIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ProfileSettingsRoute: ProfileSettingsRoute,
   ContactsContactIdEditRoute: ContactsContactIdEditRoute,
   ContactsContactIdIndexRoute: ContactsContactIdIndexRoute,
 }
@@ -116,12 +170,20 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/about",
+        "/profile/settings",
         "/contacts/$contactId/edit",
         "/contacts/$contactId/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/about": {
+      "filePath": "about.tsx"
+    },
+    "/profile/settings": {
+      "filePath": "profile/settings.tsx"
     },
     "/contacts/$contactId/edit": {
       "filePath": "contacts.$contactId.edit.tsx"
