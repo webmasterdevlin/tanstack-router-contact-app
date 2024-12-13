@@ -1,66 +1,64 @@
-import localforage from 'localforage';
-import { matchSorter } from 'match-sorter';
-import sortBy from 'sort-by';
+import { prisma } from '../../db';
 import { Contact } from '../models';
 
+
+// If you want to keep the fake network delay simulation:
+let fakeCache: { [key: string]: boolean } = {};
+async function fakeNetwork(key?: string): Promise<void> {
+  if (!key) {
+    fakeCache = {};
+  }
+  if (key && fakeCache[key]) {
+    return;
+  }
+  if (key) {
+    fakeCache[key] = true;
+    return new Promise((res) => {
+      setTimeout(res, Math.random() * 800);
+    });
+  }
+}
+
 async function getContacts(query?: string): Promise<Contact[]> {
-  // await fakeNetwork(`getContacts:${query}`);
-  // let contacts: Contact[] =
-  //   (await localforage.getItem<Contact[]>('contacts')) || [];
-  // if (query) {
-  //   contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
-  // }
-  // return contacts.sort(sortBy('last', 'createdAt'));
-  // model Contact below
-  // {
-  //   id: string;
-  //   first?: string;
-  //   last?: string;
-  //   createdAt: number;
-  //   favorite?: boolean;
-  //   avatar?: string;
-  //   twitter?: string;
-  //   notes?: string;
-  // };
-  return [
-    {
-      id: '1',
-      first: 'John',
-      last: 'Doe',
-      createdAt: 1626343200000,
-      favorite: true,
-      avatar: 'https://randomuser.me/api/portraits',
-      twitter: '@johndoe',
-      notes: 'This is a note',
-    },
-  ];
+  await fakeNetwork(`getContacts:${query}`);
+
+  // If you want to filter by `first` or `last` fields, you can leverage Prisma's where clause
+  const contacts = await prisma.contact.findMany({
+    where: query
+      ? {
+          OR: [
+            { first: { contains: query, mode: 'insensitive' } },
+            { last: { contains: query, mode: 'insensitive' } },
+          ],
+        }
+      : {},
+    orderBy: [{ last: 'asc' }, { createdAt: 'asc' }],
+  });
+
+  // If you still need matchSorter (for fuzzy matching), you could do:
+  // const filtered = query ? matchSorter(contacts, query, { keys: ['first', 'last'] }) : contacts;
+  // return filtered.sort(sortBy('last', 'createdAt'));
+
+  return contacts;
 }
 
 async function createContact(): Promise<Contact> {
   await fakeNetwork();
-  const id = Math.random().toString(36).substring(2, 9);
-  const contact: Contact = { id, createdAt: Date.now() };
-  const contacts = await getContacts();
-  contacts.unshift(contact);
-  await set(contacts);
+  // Prisma will handle ID creation automatically if using @default(cuid()) or similar
+  const contact = await prisma.contact.create({
+    data: {
+      createdAt: new Date(),
+    },
+  });
   return contact;
 }
 
 async function getContact(id: string): Promise<Contact | null> {
   await fakeNetwork(`contact:${id}`);
-  const contacts: Contact[] =
-    (await localforage.getItem<Contact[]>('contacts')) || [];
-  const contact = contacts.find((contact) => contact.id === id);
-  return {
-    id: '1',
-    first: 'John',
-    last: 'Doe',
-    createdAt: 1626343200000,
-    favorite: true,
-    avatar: 'https://randomuser.me/api/portraits',
-    twitter: '@johndoe',
-    notes: 'This is a note',
-  };
+  const contact = await prisma.contact.findUnique({
+    where: { id },
+  });
+  return contact;
 }
 
 async function updateContact(
@@ -68,48 +66,23 @@ async function updateContact(
   updates: Partial<Contact>
 ): Promise<Contact> {
   await fakeNetwork();
-  const contacts: Contact[] =
-    (await localforage.getItem<Contact[]>('contacts')) || [];
-  const contact = contacts.find((contact) => contact.id === id);
-  if (!contact) throw new Error(`No contact found for id: ${id}`);
-  Object.assign(contact, updates);
-  await set(contacts);
+  const contact = await prisma.contact.update({
+    where: { id },
+    data: updates,
+  });
   return contact;
 }
 
 async function deleteContact(id: string): Promise<boolean> {
-  const contacts: Contact[] =
-    (await localforage.getItem<Contact[]>('contacts')) || [];
-  const index = contacts.findIndex((contact) => contact.id === id);
-  if (index > -1) {
-    contacts.splice(index, 1);
-    await set(contacts);
-    return true;
-  }
-  return false;
-}
-
-function set(contacts: Contact[]): Promise<Contact[]> {
-  return localforage.setItem('contacts', contacts);
-}
-
-// fake a cache so we don't slow down stuff we've already seen
-let fakeCache: { [key: string]: boolean } = {};
-
-async function fakeNetwork(key?: string): Promise<void> {
-  if (!key) {
-    fakeCache = {};
-  }
-
-  if (key && fakeCache[key]) {
-    return;
-  }
-
-  if (key) {
-    fakeCache[key] = true;
-    return new Promise((res) => {
-      setTimeout(res, Math.random() * 800);
+  await fakeNetwork(`deleteContact:${id}`);
+  try {
+    await prisma.contact.delete({
+      where: { id },
     });
+    return true;
+  } catch (error) {
+    // If no contact found, Prisma will throw
+    return false;
   }
 }
 
