@@ -1,1 +1,0 @@
-import{j as t}from"./client-BbH3N5Po.js";const r=function(){return t.jsxs("p",{id:"zero-state",children:["This is a demo for TanStack Router.",t.jsx("br",{}),"Check out"," ",t.jsx("a",{href:"https://tanstack.com/router",children:"the docs at tanstack.com/router"}),"."]})};export{r as component};
