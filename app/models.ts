@@ -1,10 +1,10 @@
 export type Contact = {
   id: string;
-  first?: string;
-  last?: string;
-  createdAt: number;
-  favorite?: boolean;
-  avatar?: string;
-  twitter?: string;
-  notes?: string;
+  first: string | null;
+  last: string | null;
+  createdAt: Date;
+  favorite: boolean | null;
+  avatar: string | null;
+  twitter: string | null;
+  notes: string | null;
 };

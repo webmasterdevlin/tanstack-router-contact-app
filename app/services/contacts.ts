@@ -1,7 +1,6 @@
 import { prisma } from '../../db';
 import { Contact } from '../models';
 
-
 // If you want to keep the fake network delay simulation:
 let fakeCache: { [key: string]: boolean } = {};
 async function fakeNetwork(key?: string): Promise<void> {
@@ -26,10 +25,7 @@ async function getContacts(query?: string): Promise<Contact[]> {
   const contacts = await prisma.contact.findMany({
     where: query
       ? {
-          OR: [
-            { first: { contains: query, mode: 'insensitive' } },
-            { last: { contains: query, mode: 'insensitive' } },
-          ],
+          OR: [{ first: { contains: query } }, { last: { contains: query } }],
         }
       : {},
     orderBy: [{ last: 'asc' }, { createdAt: 'asc' }],

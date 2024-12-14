@@ -34,9 +34,9 @@ export const Route = createRootRoute({
         q: z.string().optional(),
     }),
     // eslint-disable-next-line sort-keys-fix/sort-keys-fix
-    loaderDeps: ({ search: { q } }) => {
-        return { q };
-    },
+    // loaderDeps: ({ search: { q } }) => {
+    //     return { q };
+    // },
     // eslint-disable-next-line sort-keys-fix/sort-keys-fix
     loader: async ({ deps: { q } }) => {
         const contacts = (await getContacts(q || '')) as Contact[];
@@ -58,13 +58,13 @@ const TanStackRouterDevtools =
         );
 
 function RootComponent() {
-    const { q } = Route.useLoaderData();
-    const [query, setQuery] = useState(q ?? '');
-    const router = useRouter();
+    // const { q } = Route.useLoaderData();
+    // const [query, setQuery] = useState(q ?? '');
+    // const router = useRouter();
 
-    useEffect(() => {
-        if (q) setQuery(q);
-    }, [q]);
+    // useEffect(() => {
+    //     if (q) setQuery(q);
+    // }, [q]);
 
     return (
         <RootDocument>
