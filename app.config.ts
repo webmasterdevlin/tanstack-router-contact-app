@@ -1,17 +1,16 @@
-import { defineConfig } from "@tanstack/start/config";
-import tsConfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from '@tanstack/start/config';
+import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   vite: {
     plugins: [
       tsConfigPaths({
-        projects: ["./tsconfig.json"],
+        projects: ['./tsconfig.json'],
       }),
     ],
   },
 
   server: {
-    // https://tanstack.com/router/latest/docs/framework/react/start/hosting#deployment
-    preset: "bun",
+    preset: 'node-server',
   },
 });
