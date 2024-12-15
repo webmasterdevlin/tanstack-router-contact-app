@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@prisma/client": "^6.0.1",
-    "@tanstack/react-query-devtools": "^5.62.7",
     "@tanstack/router-cli": "^1.87.7",
     "@tanstack/router-devtools": "^1.89.0",
     "@types/node": "^22.10.2",
