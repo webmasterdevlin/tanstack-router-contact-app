@@ -74,8 +74,10 @@ function RootComponent() {
             </div>
             <div id="detail">
                 <Outlet />
+                <Suspense>
+                    <TanStackRouterDevtools initialIsOpen={true} />
+                </Suspense>
             </div>
-
         </RootDocument>
     )
 }
