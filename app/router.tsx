@@ -1,4 +1,5 @@
 // app/router.tsx
+import "./styles/index.css";
 import { createRouter as createTanStackRouter, ErrorComponent } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
