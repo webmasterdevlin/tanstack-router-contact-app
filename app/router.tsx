@@ -1,10 +1,16 @@
 // app/router.tsx
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
+import { createRouter as createTanStackRouter, ErrorComponent } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
 export function createRouter() {
   const router = createTanStackRouter({
     routeTree,
+    defaultErrorComponent: ({ error }) => {
+      return <ErrorComponent error={error} />;
+    },
+    defaultNotFoundComponent: () => {
+      return <h1>Not Found</h1>;
+    },
   })
 
   return router
