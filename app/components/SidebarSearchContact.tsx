@@ -10,7 +10,6 @@ type Props = {
 };
 
 export default function SidebarSearchContact({ query, setQuery }: Props) {
-  const createContact = useServerFn(createContactFn)
   const navigate = Route.useNavigate();
   const router = useRouter();
 
@@ -18,6 +17,8 @@ export default function SidebarSearchContact({ query, setQuery }: Props) {
     setQuery(e.currentTarget.value);
     await navigate({ search: { q: e.currentTarget.value } });
   };
+
+  const createContact = useServerFn(createContactFn)
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
