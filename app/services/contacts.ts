@@ -1,5 +1,7 @@
+import { matchSorter } from 'match-sorter';
 import { prisma } from '../../db';
 import { Contact } from '../models';
+import sortBy from 'sort-by';
 
 // If you want to keep the fake network delay simulation:
 let fakeCache: { [key: string]: boolean } = {};
@@ -32,10 +34,12 @@ async function getContacts(query?: string): Promise<Contact[]> {
   });
 
   // If you still need matchSorter (for fuzzy matching), you could do:
-  // const filtered = query ? matchSorter(contacts, query, { keys: ['first', 'last'] }) : contacts;
-  // return filtered.sort(sortBy('last', 'createdAt'));
+  const filtered = query
+    ? matchSorter(contacts, query, { keys: ['first', 'last'] })
+    : contacts;
+  return filtered.sort(sortBy('last', 'createdAt'));
 
-  return contacts;
+  // return contacts;
 }
 
 async function createContact(): Promise<Contact> {
