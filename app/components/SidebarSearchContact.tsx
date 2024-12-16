@@ -2,6 +2,8 @@ import { FormEvent } from 'react';
 import { Route } from '../routes/__root';
 import { useRouter } from '@tanstack/react-router';
 import { createContact } from '../services/contacts';
+import { useServerFn } from '@tanstack/start';
+import { createContactFn } from '@/functions/contact';
 
 type Props = {
   query: string;
@@ -9,6 +11,7 @@ type Props = {
 };
 
 export default function SidebarSearchContact({ query, setQuery }: Props) {
+  const createContact = useServerFn(createContactFn)
   const navigate = Route.useNavigate();
   const router = useRouter();
 

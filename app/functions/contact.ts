@@ -9,7 +9,7 @@ import { createServerFn } from '@tanstack/start';
 import { z } from 'zod';
 
 export const createContactFn = createServerFn().handler(async () => {
-  await createContact();
+  return await createContact();
 });
 
 export const getContactsFn = createServerFn().handler(async () => {
