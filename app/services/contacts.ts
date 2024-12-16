@@ -43,7 +43,6 @@ async function getContacts(query?: string): Promise<Contact[]> {
 }
 
 async function createContact(): Promise<Contact> {
-  console.log('createContact');
   await fakeNetwork();
   // Prisma will handle ID creation automatically if using @default(cuid()) or similar
   const contact = await prisma.contact.create({

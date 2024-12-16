@@ -10,7 +10,6 @@ import { z } from 'zod';
 
 export const createContactFn = createServerFn({ method: 'POST' }).handler(
   async () => {
-    console.log('createContactFn');
     return await createContact();
   }
 );
@@ -34,14 +33,12 @@ export const getContactFn = createServerFn({ method: 'GET' })
 
 const UpdateContactType = z.object({
   id: z.string(),
-  contact: z.object({
-    first: z.string().optional(),
-    last: z.string().optional(),
-    favorite: z.boolean().optional(),
-    avatar: z.string().optional(),
-    twitter: z.string().optional(),
-    notes: z.string().optional(),
-  }),
+  first: z.string().nullable(),
+  last: z.string().nullable(),
+  favorite: z.boolean().nullable(),
+  avatar: z.string().nullable(),
+  twitter: z.string().nullable(),
+  notes: z.string().nullable(),
 });
 
 // TODO: Fix validation bug
@@ -50,7 +47,7 @@ export const updateContactFn = createServerFn({ method: 'POST' })
     return UpdateContactType.parse(contact);
   })
   .handler(async ({ data }) => {
-    const contact = await updateContact(data.id, data.contact);
+    const contact = await updateContact(data.id, data);
     return contact;
   });
 

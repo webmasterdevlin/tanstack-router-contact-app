@@ -1,7 +1,8 @@
 import React from 'react';
 import { Contact } from '@/models';
-import { updateContact } from '@/services/contacts';
 import { useRouter } from '@tanstack/react-router';
+import { updateContactFn } from '@/functions/contact';
+import { useServerFn } from '@tanstack/start';
 
 type FavoriteProps = {
   contact: Contact;
@@ -11,14 +12,13 @@ const Favorite = ({ contact }: FavoriteProps) => {
   let favorite = contact.favorite;
   const router = useRouter();
 
+  const updateContact = useServerFn(updateContactFn);
+
   return (
     <form
       onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await updateContact(contact.id, {
-          ...contact,
-          favorite: !contact.favorite,
-        });
+        await updateContact({ data: { ...contact, favorite: !contact.favorite } });
         await router.invalidate();
       }}
     >

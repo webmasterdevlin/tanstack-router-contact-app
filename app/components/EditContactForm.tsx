@@ -15,7 +15,8 @@ export default function EditContactForm() {
     const form = event.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     const updates = Object.fromEntries(formData.entries());
-    await updateContact({ data: { id: params.contactId, ...updates } });
+    const updatedContact = { ...contact, ...updates };
+    await updateContact({ data: updatedContact });
     await navigate({
       to: `/contacts/${params.contactId}`,
     });
@@ -30,14 +31,14 @@ export default function EditContactForm() {
           aria-label="First name"
           type="text"
           name="first"
-          defaultValue={contact.first}
+          defaultValue={contact.first!}
         />
         <input
           placeholder="Last"
           aria-label="Last name"
           type="text"
           name="last"
-          defaultValue={contact.last}
+          defaultValue={contact.last!}
         />
       </p>
       <label>
@@ -46,7 +47,7 @@ export default function EditContactForm() {
           type="text"
           name="twitter"
           placeholder="@jack"
-          defaultValue={contact.twitter}
+          defaultValue={contact.twitter!}
         />
       </label>
       <label>
@@ -56,12 +57,12 @@ export default function EditContactForm() {
           aria-label="Avatar URL"
           type="text"
           name="avatar"
-          defaultValue={contact.avatar}
+          defaultValue={contact.avatar!}
         />
       </label>
       <label>
         <span>Notes</span>
-        <textarea name="notes" defaultValue={contact.notes} rows={6} />
+        <textarea name="notes" defaultValue={contact.notes!} rows={6} />
       </label>
       <p>
         <button type="submit">Save</button>
