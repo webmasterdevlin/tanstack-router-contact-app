@@ -1,5 +1,5 @@
-import { Route } from '@/routes/contacts.$contactId.index';
 import { FormEvent } from 'react';
+import { Route } from '@/routes/contacts.$contactId.index';
 import { deleteContact } from '@/services/contacts';
 import Favorite from './Favorite';
 

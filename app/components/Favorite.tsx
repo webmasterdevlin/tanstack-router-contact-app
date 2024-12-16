@@ -1,5 +1,5 @@
-import { Contact } from '@/models';
 import React from 'react';
+import { Contact } from '@/models';
 import { updateContact } from '@/services/contacts';
 import { useRouter } from '@tanstack/react-router';
 
