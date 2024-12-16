@@ -68,7 +68,7 @@ function RootComponent() {
 
     return (
         <RootDocument>
-            <div style={{ display: 'flex', width: 'auto' }} >
+            <div style={{ display: 'flex', width: 'auto' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }} id="sidebar">
                     <SidebarFooter />
                     <SidebarSearchContact query={query} setQuery={setQuery} />
