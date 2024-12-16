@@ -10,6 +10,7 @@ import { z } from 'zod';
 
 export const createContactFn = createServerFn({ method: 'POST' }).handler(
   async () => {
+    console.log('createContactFn');
     return await createContact();
   }
 );
