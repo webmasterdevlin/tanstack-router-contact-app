@@ -7,12 +7,12 @@ import {
 } from '@tanstack/react-router'
 import { Meta, Scripts } from '@tanstack/start'
 import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
-import SidebarContactList from '../components/SidebarContactList';
-import SidebarFooter from '../components/SidebarFooter';
-import SidebarSearchContact from '../components/SidebarSearchContact';
+import SidebarContactList from '@/components/SidebarContactList';
+import SidebarFooter from '@/components/SidebarFooter';
+import SidebarSearchContact from '@/components/SidebarSearchContact';
 import { z } from 'zod';
-import { Contact } from '../models';
-import { getContacts } from '../services/contacts';
+import { Contact } from '@/models';
+import { getContacts } from '@/services/contacts';
 
 export const Route = createRootRoute({
     head: () => ({

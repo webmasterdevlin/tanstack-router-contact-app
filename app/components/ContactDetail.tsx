@@ -1,6 +1,6 @@
-import { Route } from '../routes/contacts.$contactId.index';
+import { Route } from '@/routes/contacts.$contactId.index';
 import { FormEvent } from 'react';
-import { deleteContact } from '../services/contacts';
+import { deleteContact } from '@/services/contacts';
 import Favorite from './Favorite';
 
 export default function ContactDetail() {

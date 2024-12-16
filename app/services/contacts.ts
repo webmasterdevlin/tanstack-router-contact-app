@@ -1,6 +1,6 @@
 import { matchSorter } from 'match-sorter';
-import { prisma } from '../../db';
-import { Contact } from '../models';
+import { prisma } from '@/../db';
+import { Contact } from '@/models';
 import sortBy from 'sort-by';
 
 // If you want to keep the fake network delay simulation:

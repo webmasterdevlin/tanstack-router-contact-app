@@ -1,7 +1,6 @@
 import { FormEvent } from 'react';
 import { Route } from '../routes/__root';
 import { useRouter } from '@tanstack/react-router';
-import { createContact } from '../services/contacts';
 import { useServerFn } from '@tanstack/start';
 import { createContactFn } from '@/functions/contact';
 
