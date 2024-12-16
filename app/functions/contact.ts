@@ -44,6 +44,7 @@ const UpdateContactType = z.object({
   }),
 });
 
+// TODO: Fix validation bug
 export const updateContactFn = createServerFn({ method: 'POST' })
   .validator((contact: unknown) => {
     return UpdateContactType.parse(contact);

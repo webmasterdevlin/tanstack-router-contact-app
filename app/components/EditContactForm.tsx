@@ -1,18 +1,21 @@
 import { FormEvent } from 'react';
-import { updateContact } from '@/services/contacts';
 import { Route } from '@/routes/contacts.$contactId.edit';
+import { updateContactFn } from '@/functions/contact';
+import { useServerFn } from '@tanstack/start';
 
 export default function EditContactForm() {
   const contact = Route.useLoaderData();
   const params = Route.useParams();
   const navigate = Route.useNavigate();
 
+  const updateContact = useServerFn(updateContactFn);
+
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     const updates = Object.fromEntries(formData.entries());
-    await updateContact(params.contactId as string, updates);
+    await updateContact({ data: { id: params.contactId, ...updates } });
     await navigate({
       to: `/contacts/${params.contactId}`,
     });
