@@ -60,11 +60,3 @@ export const deleteContactFn = createServerFn({ method: 'POST' })
     }
     return success;
   });
-
-export default {
-  createContactFn,
-  getContactsFn,
-  getContactFn,
-  updateContactFn,
-  deleteContactFn,
-};
