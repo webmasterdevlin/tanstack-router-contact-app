@@ -14,7 +14,7 @@ export const createContactFn = createServerFn({ method: 'POST' }).handler(
     return await createContact();
   }
 );
-// async function getContacts(query?: string): Promise<Contact[]> {
+
 export const getContactsFn = createServerFn({ method: 'GET' })
   .validator((query?: string) => query)
   .handler(async () => {
