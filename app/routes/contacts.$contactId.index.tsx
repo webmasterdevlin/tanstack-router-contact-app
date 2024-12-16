@@ -1,10 +1,10 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { z } from 'zod';
 
-import { getContact } from '@/services/contacts';
 import ContactDetail from '@/components/ContactDetail';
 import NotFoundPage from '@/components/NotFoundPage';
 import ErrorPage from '@/components/ErrorPage';
+import { getContactFn } from '@/functions/contact';
 
 export const Route = createFileRoute('/contacts/$contactId/')({
   component: ContactIdIndexComponent,
@@ -22,7 +22,7 @@ export const Route = createFileRoute('/contacts/$contactId/')({
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   loader: async ({ params: { contactId } }) => {
-    const contact = await getContact(contactId as string);
+    const contact = await getContactFn({ data: contactId });
     if (!contact) {
       throw notFound({ _global: false });
     }

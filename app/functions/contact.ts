@@ -14,11 +14,13 @@ export const createContactFn = createServerFn({ method: 'POST' }).handler(
     return await createContact();
   }
 );
-
-export const getContactsFn = createServerFn().handler(async () => {
-  const contacts = await getContacts();
-  return contacts;
-});
+// async function getContacts(query?: string): Promise<Contact[]> {
+export const getContactsFn = createServerFn({ method: 'GET' })
+  .validator((query?: string) => query)
+  .handler(async () => {
+    const contacts = await getContacts();
+    return contacts;
+  });
 
 export const getContactFn = createServerFn({ method: 'GET' })
   .validator((data: string) => data)
