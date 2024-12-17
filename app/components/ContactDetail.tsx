@@ -1,7 +1,8 @@
 import { FormEvent } from 'react';
 import { Route } from '@/routes/contacts.$contactId.index';
-import { deleteContact } from '@/services/contacts';
 import Favorite from './Favorite';
+import { useServerFn } from '@tanstack/start';
+import { deleteContactFn } from '@/functions/contact';
 
 export default function ContactDetail() {
   const contact = Route.useLoaderData();
@@ -15,10 +16,12 @@ export default function ContactDetail() {
     });
   };
 
+  const deleteContact = useServerFn(deleteContactFn);
+
   const handleDeleteEvent = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (globalThis.confirm('Please confirm you want to delete this record.')) {
-      await deleteContact(params.contactId);
+      await deleteContact({ data: params.contactId });
       await navigate({
         to: '/',
       });
