@@ -1,19 +1,18 @@
-// app/routes/__root.tsx
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import {
     Outlet,
     ScrollRestoration,
     createRootRoute,
     useRouter,
 } from '@tanstack/react-router'
+import { z } from 'zod';
 import { Meta, Scripts } from '@tanstack/start'
-import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
+import { Contact } from '@/models';
+import { getContactsFn } from '@/functions/contact';
 import SidebarContactList from '@/components/SidebarContactList';
 import SidebarFooter from '@/components/SidebarFooter';
 import SidebarSearchContact from '@/components/SidebarSearchContact';
-import { z } from 'zod';
-import { Contact } from '@/models';
-import { getContacts } from '@/services/contacts';
-import { getContactsFn } from '@/functions/contact';
+
 
 export const Route = createRootRoute({
     head: () => ({
@@ -41,7 +40,6 @@ export const Route = createRootRoute({
     // eslint-disable-next-line sort-keys-fix/sort-keys-fix
     loader: async ({ deps: { q } }) => {
         const contacts = (await getContactsFn({ data: q || '' })) as Contact[];
-
         return { contacts, q };
     },
 })

@@ -22,24 +22,13 @@ async function fakeNetwork(key?: string): Promise<void> {
 
 async function getContacts(query?: string): Promise<Contact[]> {
   await fakeNetwork(`getContacts:${query}`);
-
-  // If you want to filter by `first` or `last` fields, you can leverage Prisma's where clause
-  const contacts = await prisma.contact.findMany({
-    where: query
-      ? {
-          OR: [{ first: { contains: query } }, { last: { contains: query } }],
-        }
-      : {},
-    orderBy: [{ last: 'asc' }, { createdAt: 'asc' }],
+  let contacts = await prisma.contact.findMany({
+    orderBy: [{ first: 'asc' }, { last: 'asc' }],
   });
-
-  // If you still need matchSorter (for fuzzy matching), you could do:
-  const filtered = query
-    ? matchSorter(contacts, query, { keys: ['first', 'last'] })
-    : contacts;
-  return filtered.sort(sortBy('last', 'createdAt'));
-
-  // return contacts;
+  if (query) {
+    contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
+  }
+  return contacts.sort(sortBy('last', 'createdAt'));
 }
 
 async function createContact(): Promise<Contact> {
