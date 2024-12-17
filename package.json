@@ -14,20 +14,18 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.91.1",
+    "@tanstack/react-router": "^1.91.2",
     "@tanstack/react-router-with-query": "^1.90.0",
     "@tanstack/router-vite-plugin": "^1.87.13",
-    "@tanstack/start": "^1.90.0",
-    "match-sorter": "^6.4.0",
+    "@tanstack/start": "^1.91.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sort-by": "^1.2.0",
     "vinxi": "^0.5.1"
   },
   "devDependencies": {
     "@prisma/client": "^6.0.1",
     "@tanstack/router-cli": "^1.87.7",
-    "@tanstack/router-devtools": "^1.91.1",
+    "@tanstack/router-devtools": "^1.91.2",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",

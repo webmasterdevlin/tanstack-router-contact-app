@@ -1,7 +1,5 @@
-import { matchSorter } from 'match-sorter';
 import { prisma } from '@/../db';
 import { Contact } from '@/models';
-import sortBy from 'sort-by';
 
 // If you want to keep the fake network delay simulation:
 let fakeCache: { [key: string]: boolean } = {};
@@ -22,15 +20,16 @@ async function fakeNetwork(key?: string): Promise<void> {
 
 async function getContacts(query?: string): Promise<Contact[]> {
   await fakeNetwork(`getContacts:${query}`);
-  let contacts = await prisma.contact.findMany({
-    orderBy: [{ first: 'asc' }, { last: 'asc' }],
+  const contacts = await prisma.contact.findMany({
+    where: query
+      ? {
+          OR: [{ first: { contains: query } }, { last: { contains: query } }],
+        }
+      : {},
+    orderBy: [{ last: 'asc' }, { createdAt: 'asc' }],
   });
-  if (query) {
-    contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
-  }
-  const filteredContacts = contacts.sort(sortBy('last', 'createdAt'));
-  console.log('filteredContacts', filteredContacts);
-  return filteredContacts;
+
+  return contacts;
 }
 
 async function createContact(): Promise<Contact> {

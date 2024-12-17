@@ -16,8 +16,8 @@ export const createContactFn = createServerFn({ method: 'POST' }).handler(
 
 export const getContactsFn = createServerFn({ method: 'GET' })
   .validator((query?: string) => query)
-  .handler(async () => {
-    const contacts = await getContacts();
+  .handler(async ({ data }) => {
+    const contacts = await getContacts(data);
     return contacts;
   });
 
