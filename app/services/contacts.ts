@@ -28,7 +28,9 @@ async function getContacts(query?: string): Promise<Contact[]> {
   if (query) {
     contacts = matchSorter(contacts, query, { keys: ['first', 'last'] });
   }
-  return contacts.sort(sortBy('last', 'createdAt'));
+  const filteredContacts = contacts.sort(sortBy('last', 'createdAt'));
+  console.log('filteredContacts', filteredContacts);
+  return filteredContacts;
 }
 
 async function createContact(): Promise<Contact> {
