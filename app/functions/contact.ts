@@ -31,7 +31,7 @@ export const getContactFn = createServerFn({ method: 'GET' })
     return contact;
   });
 
-const UpdateContactType = z.object({
+const ContactValidationSchema = z.object({
   id: z.string(),
   first: z.string().nullable(),
   last: z.string().nullable(),
@@ -44,7 +44,7 @@ const UpdateContactType = z.object({
 // TODO: Fix validation bug
 export const updateContactFn = createServerFn({ method: 'POST' })
   .validator((contact: unknown) => {
-    return UpdateContactType.parse(contact);
+    return ContactValidationSchema.parse(contact);
   })
   .handler(async ({ data }) => {
     const contact = await updateContact(data.id, data);
