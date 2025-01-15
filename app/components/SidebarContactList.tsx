@@ -10,7 +10,9 @@ export default function SidebarContactList() {
         <ul>
           {contacts.map((contact) => (
             <li key={contact.id}>
-              <Link to={`/contacts/${contact.id}`}>
+              <Link to={`/contacts/$contactId`}
+                params={{ contactId: contact.id }}
+              >
                 {contact.first || contact.last ? (
                   <>
                     {contact.first} {contact.last}
