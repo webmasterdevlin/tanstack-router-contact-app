@@ -1,3 +1,4 @@
+import globalStyle from '../styles/index.css?url';
 import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import {
     Outlet,
@@ -28,6 +29,12 @@ export const Route = createRootRoute({
                 title: 'TanStack Start Starter',
             },
         ],
+        links: [
+            {
+                rel: 'stylesheet',
+                href: globalStyle
+            },
+        ]
     }),
     component: RootComponent,
     validateSearch: z.object({
