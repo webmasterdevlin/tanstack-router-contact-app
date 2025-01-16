@@ -63,7 +63,7 @@ const TanStackRouterDevtools =
             }))
         );
 
-function RootComponent() {
+export function RootComponent() {
     const { q } = Route.useLoaderData();
     const [query, setQuery] = useState(q ?? '');
     const router = useRouter();
