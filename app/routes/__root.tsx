@@ -46,6 +46,8 @@ export const Route = createRootRoute({
     },
     // eslint-disable-next-line sort-keys-fix/sort-keys-fix
     loader: async ({ deps: { q } }) => {
+        console.log("I am running in the server");
+
         const contacts = (await getContactsFn({ data: q || '' })) as Contact[];
         return { contacts, q };
     },
