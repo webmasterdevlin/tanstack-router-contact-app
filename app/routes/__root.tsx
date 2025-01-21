@@ -67,7 +67,7 @@ export const Route = createRootRoute({
     loader: async ({ deps: { q } }) => {
         console.log("I am running in the server");
 
-        const contacts = (await getContactsFn({ data: q || '' })) as Contact[];
+        const contacts = (await getContactsFn({ data: q || '' }));
         return { contacts, q };
     },
 })
