@@ -138,7 +138,7 @@ export const Route = createRootRoute({
 - [x] see the changes in the browser. It says **no contacts**.
 - [x] replace the placeholder of contacts with the `Route` instance from the `__root.tsx` file.
 ```tsx
-const { contacts } = Route.useLoaderData();
+const { contacts } = useLoaderData({ from: '__root__' })
 ```
 - [x] see the changes in the browser. It should now show the list of contacts with one object (no name).
 
@@ -297,7 +297,7 @@ function EditContactComponent() {
 ```
 - [x] go back also to the `SidebarSearchContact.tsx` file. Import the `Route` from the `__root.tsx` and add this hook to the component.
 ```tsx
-  const navigate = Route.useNavigate();
+  const navigate = useNavigate({ from: "/" });
 ```
 - [x] update the `handleOnSubmit` with this logic.
 ```tsx

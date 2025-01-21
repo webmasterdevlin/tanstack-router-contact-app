@@ -8,7 +8,6 @@ import {
 } from '@tanstack/react-router'
 import { z } from 'zod';
 import { Meta, Scripts } from '@tanstack/start'
-import { Contact } from '@/models';
 import { getContactsFn } from '@/functions/contact';
 import SidebarContactList from '@/components/SidebarContactList';
 import SidebarFooter from '@/components/SidebarFooter';
