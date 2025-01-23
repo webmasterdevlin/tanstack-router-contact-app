@@ -1,5 +1,8 @@
-import { createRouter as createTanStackRouter, ErrorComponent } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import {
+  createRouter as createTanStackRouter,
+  ErrorComponent,
+} from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
 
 export function createRouter() {
   const router = createTanStackRouter({
@@ -11,13 +14,13 @@ export function createRouter() {
     defaultNotFoundComponent: () => {
       return <h1>Not Found</h1>;
     },
-  })
+  });
 
-  return router
+  return router;
 }
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: ReturnType<typeof createRouter>
+    router: ReturnType<typeof createRouter>;
   }
 }
