@@ -2,7 +2,6 @@ import globalStyle from '../styles/index.css?url';
 import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import {
     Outlet,
-    ScrollRestoration,
     createRootRoute,
     useRouter,
 } from '@tanstack/react-router'
@@ -119,7 +118,6 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
             </head>
             <body>
                 {children}
-                <ScrollRestoration />
                 <Scripts />
             </body>
         </html>

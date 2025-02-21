@@ -14,6 +14,7 @@ export function createRouter() {
     defaultNotFoundComponent: () => {
       return <h1>Not Found</h1>;
     },
+    scrollRestoration: true
   });
 
   return router;
