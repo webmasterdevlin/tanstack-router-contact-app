@@ -14,7 +14,8 @@ export default function EditContactForm() {
     const updates = Object.fromEntries(formData.entries());
     await updateContact(params.contactId as string, updates);
     await navigate({
-      to: `/contacts/${params.contactId}`,
+      to: '/contacts/$contactId',
+      params: { contactId: params.contactId },
     });
   };
 
@@ -66,7 +67,8 @@ export default function EditContactForm() {
           type="button"
           onClick={() =>
             navigate({
-              to: `/contacts/${contact.id}`,
+              to: `/contacts/$contactId`,
+              params: { contactId: contact.id },
             })
           }
         >

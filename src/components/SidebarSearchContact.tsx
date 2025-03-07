@@ -19,10 +19,13 @@ export default function SidebarSearchContact({ query, setQuery }: Props) {
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const contact = await createContact();
     await navigate({
-      to: `/contacts/${contact.id}/edit`,
+      to: '/contacts/$contactId/edit',
+      params: { contactId: contact.id },
     });
+
   };
 
   return (

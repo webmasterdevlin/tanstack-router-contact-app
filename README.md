@@ -291,7 +291,8 @@ function EditContactComponent() {
   const handleEditEvent = async (event: FormEvent) => {
     event.preventDefault();
     await navigate({
-      to: `/contacts/${params.contactId}/edit`,
+      to: `/contacts/${contactId}/edit`, // add contact.id to the URL
+      params: { contactId:${params.contactId} },
     });
   };
 ```
