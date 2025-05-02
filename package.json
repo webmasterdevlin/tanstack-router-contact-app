@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-router": "^1.119.0",
+    "@tanstack/react-router-devtools": "^1.119.1",
     "@tanstack/router-vite-plugin": "^1.119.0",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
@@ -20,7 +21,6 @@
   },
   "devDependencies": {
     "@tanstack/router-cli": "^1.119.0",
-    "@tanstack/router-devtools": "^1.119.1",
     "@types/node": "^22.15.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",
