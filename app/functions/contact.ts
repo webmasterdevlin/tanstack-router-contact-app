@@ -5,7 +5,7 @@ import {
   getContacts,
   updateContact,
 } from '@/services/contacts';
-import { createServerFn } from '@tanstack/start';
+import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
 
 export const createContactFn = createServerFn({ method: 'POST' }).handler(

@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { useNavigate, useRouter } from '@tanstack/react-router';
-import { useServerFn } from '@tanstack/start';
+import { useServerFn } from '@tanstack/react-start';
 import { createContactFn } from '@/functions/contact';
 
 type Props = {

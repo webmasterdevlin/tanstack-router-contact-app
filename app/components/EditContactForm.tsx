@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { Route } from '@/routes/contacts.$contactId.edit';
 import { updateContactFn } from '@/functions/contact';
-import { useServerFn } from '@tanstack/start';
+import { useServerFn } from '@tanstack/react-start';
 
 export default function EditContactForm() {
   const contact = Route.useLoaderData();

@@ -4,9 +4,10 @@ import {
     Outlet,
     createRootRoute,
     useRouter,
+    HeadContent,
+    Scripts
 } from '@tanstack/react-router'
 import { z } from 'zod';
-import { Meta, Scripts } from '@tanstack/start'
 import { getContactsFn } from '@/functions/contact';
 import SidebarContactList from '@/components/SidebarContactList';
 import SidebarFooter from '@/components/SidebarFooter';
@@ -75,7 +76,7 @@ const TanStackRouterDevtools =
         ? () => null // Render nothing in production
         : lazy(() =>
             // Lazy load in development
-            import('@tanstack/router-devtools').then((res) => ({
+            import('@tanstack/react-router-devtools').then((res) => ({
                 default: res.TanStackRouterDevtools,
                 // For Embedded Mode
                 // default: res.TanStackRouterDevtoolsPanel
@@ -114,7 +115,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     return (
         <html>
             <head>
-                <Meta />
+                <HeadContent />
             </head>
             <body>
                 {children}

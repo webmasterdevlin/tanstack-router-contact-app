@@ -2,7 +2,7 @@ import React from 'react';
 import { Contact } from '@/models';
 import { useRouter } from '@tanstack/react-router';
 import { updateContactFn } from '@/functions/contact';
-import { useServerFn } from '@tanstack/start';
+import { useServerFn } from '@tanstack/react-start';
 
 type FavoriteProps = {
   contact: Contact;
