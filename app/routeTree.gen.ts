@@ -11,13 +11,21 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PostsImport } from './routes/posts'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
+import { Route as PostsIdImport } from './routes/posts/$id'
 import { Route as ContactsContactIdIndexImport } from './routes/contacts.$contactId.index'
 import { Route as ContactsContactIdEditImport } from './routes/contacts.$contactId.edit'
 
 // Create/Update Routes
+
+const PostsRoute = PostsImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -35,6 +43,12 @@ const ProfileSettingsRoute = ProfileSettingsImport.update({
   id: '/profile/settings',
   path: '/profile/settings',
   getParentRoute: () => rootRoute,
+} as any)
+
+const PostsIdRoute = PostsIdImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => PostsRoute,
 } as any)
 
 const ContactsContactIdIndexRoute = ContactsContactIdIndexImport.update({
@@ -67,6 +81,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts/$id': {
+      id: '/posts/$id'
+      path: '/$id'
+      fullPath: '/posts/$id'
+      preLoaderRoute: typeof PostsIdImport
+      parentRoute: typeof PostsImport
+    }
     '/profile/settings': {
       id: '/profile/settings'
       path: '/profile/settings'
@@ -93,9 +121,21 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface PostsRouteChildren {
+  PostsIdRoute: typeof PostsIdRoute
+}
+
+const PostsRouteChildren: PostsRouteChildren = {
+  PostsIdRoute: PostsIdRoute,
+}
+
+const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
+  '/posts/$id': typeof PostsIdRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId': typeof ContactsContactIdIndexRoute
@@ -104,6 +144,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
+  '/posts/$id': typeof PostsIdRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId': typeof ContactsContactIdIndexRoute
@@ -113,6 +155,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
+  '/posts/$id': typeof PostsIdRoute
   '/profile/settings': typeof ProfileSettingsRoute
   '/contacts/$contactId/edit': typeof ContactsContactIdEditRoute
   '/contacts/$contactId/': typeof ContactsContactIdIndexRoute
@@ -123,6 +167,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/posts'
+    | '/posts/$id'
     | '/profile/settings'
     | '/contacts/$contactId/edit'
     | '/contacts/$contactId'
@@ -130,6 +176,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/posts'
+    | '/posts/$id'
     | '/profile/settings'
     | '/contacts/$contactId/edit'
     | '/contacts/$contactId'
@@ -137,6 +185,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/posts'
+    | '/posts/$id'
     | '/profile/settings'
     | '/contacts/$contactId/edit'
     | '/contacts/$contactId/'
@@ -146,6 +196,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  PostsRoute: typeof PostsRouteWithChildren
   ProfileSettingsRoute: typeof ProfileSettingsRoute
   ContactsContactIdEditRoute: typeof ContactsContactIdEditRoute
   ContactsContactIdIndexRoute: typeof ContactsContactIdIndexRoute
@@ -154,6 +205,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  PostsRoute: PostsRouteWithChildren,
   ProfileSettingsRoute: ProfileSettingsRoute,
   ContactsContactIdEditRoute: ContactsContactIdEditRoute,
   ContactsContactIdIndexRoute: ContactsContactIdIndexRoute,
@@ -171,6 +223,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/posts",
         "/profile/settings",
         "/contacts/$contactId/edit",
         "/contacts/$contactId/"
@@ -181,6 +234,16 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/posts": {
+      "filePath": "posts.tsx",
+      "children": [
+        "/posts/$id"
+      ]
+    },
+    "/posts/$id": {
+      "filePath": "posts/$id.tsx",
+      "parent": "/posts"
     },
     "/profile/settings": {
       "filePath": "profile/settings.tsx"

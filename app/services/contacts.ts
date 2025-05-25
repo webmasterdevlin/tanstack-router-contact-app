@@ -1,5 +1,7 @@
-import { prisma } from '@/../db';
 import { Contact } from '@/models';
+import { PrismaClient } from 'generated/prisma';
+
+const prisma = new PrismaClient();
 
 // If you want to keep the fake network delay simulation:
 let fakeCache: { [key: string]: boolean } = {};
